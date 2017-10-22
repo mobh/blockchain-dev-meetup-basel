@@ -1,7 +1,7 @@
 # Meetup 1 : 26.10.2017
 ### Ethereum
 
-<img src="images/EtherumStack_MeetupBasel_s.jpg" style="height:320px">
+<img src="../images/EtherumStack_MeetupBasel_s.jpg" style="height:320px">
 
 ----
 
@@ -19,18 +19,22 @@ https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windo
 *start terminal
 
 *Install homebrew
+```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
 * Install geth
+```
 brew tap ethereum/ethereum
 brew install ethereum
 ( if already installed execute "brew upgrade ethereum")
-
+```
 
 * execute geth on Main net (downlads live chain)
+```
 $ geth version
 $ geth
-
+```
 
 *Check Nodes of Main Net
 https://www.ethernodes.org/network/1
@@ -53,15 +57,21 @@ https://www.ethernodes.org/network/2
 
 * create a private Blockchain
 
+```
 cd ~
 mkdir ethereum
 (add Path in ENV variables to reduce typing)
 echo 'export ethereum_home=/Users/myUserName/ethereum' >> ~/.bash_profile
+```
 Example: echo 'export ethereum_home=/Users/mbenhajla/Documents/Blockchain_Meetup/work/ethereum'>> ~/.bash_profile
 (use vi or any another editor to create the genesis block)
+
+```
 vi $ethereum_home/genesis26.json
+```
 
 -copy following json contents in file "genesis26.json"
+```json
 {
   "config": {
         "chainId": 26,
@@ -78,7 +88,7 @@ vi $ethereum_home/genesis26.json
   "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
   "timestamp"  : "0x00"
 }
-
+```
 NOTE:
 coinbase: is the Address that mining rewards are sent; set your new created account there 
 example: "0x1762cf22fde7928d3a84e812e009887e152e4e96"
@@ -86,12 +96,15 @@ example: "0x1762cf22fde7928d3a84e812e009887e152e4e96"
 
 -save "genesis26.json" ( with esc !wq)
 
--init the first block in the chain on first node 
+-init the first block in the chain on first node
+``` 
 geth --datadir $ethereum_home/node1 init $ethereum_home/genesis26.json
-
+```
 
 - launch with console & interact with the node 1
+```
 geth --datadir $ethereum_home/node1 --networkid 26 console
+```
 ( port can be set -port "another Port" example "35555")
 
 -Get the list of the available commands
@@ -240,6 +253,7 @@ miner.start(1)
 - check Balance 
 eth.getBalance(eth.accounts[0])
 
+```solidity
 Example 1 (simple):
 +++++++++++++++++
 pragma solidity ^0.4.18;
@@ -272,6 +286,9 @@ contract Bank{
     }
 }
 
+```
+
+```solidity
 Example 2 is optional :(advanced, needs rework to fix warnings in 0.4.18):
 +++++++++++++++++
 
@@ -349,6 +366,7 @@ contract AnotherBank { // CamelCase
     }
 }
 
+```
 Note: set gaz limit to 3000000 ( in remix)
 
 *************************************
