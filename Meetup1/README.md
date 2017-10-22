@@ -1,7 +1,7 @@
 # Meetup 1 : 26.10.2017
 ### Ethereum
 
-<img src="images/EtherumStack_MeetupBasel_s.png" style="height:558px">
+<img src="images/EtherumStack_MeetupBasel_s.jpg" style="height:320px">
 
 ----
 
@@ -50,14 +50,6 @@ $ geth --testnet
 https://www.ethernodes.org/network/2
 
 # build a private blockchain
-
-* Create an account to use as the coinbase for your blockchain node
-Example:
-macbook-pro:ethereum  geth account new
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase: 
-Repeat passphrase: 
-Address: {1762cf22fde7928d3a84e812e009887e152e4e96}
 
 * create a private Blockchain
 

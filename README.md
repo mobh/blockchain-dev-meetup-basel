@@ -11,20 +11,20 @@ Topics are:
 * Hyperleger
 * IOTA
 
---
+----
 <img src="images/ethereum.png" style="height:320px">
 
---
+----
 
 <img src="images/bitcoin.png" style="height:320px">
 
---
+----
 <img src="images/hyperledger.png" style="height:320px">
 
---
+----
 <img src="images/iota.png" style="height:320px">
 
---
+----
 
 ## Links & definitions for Ethereum
 * Ethereum 
