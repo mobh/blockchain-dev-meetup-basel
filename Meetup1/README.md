@@ -1,14 +1,14 @@
 # Meetup 1 : 26.10.2017
-### Ethereum
+## Ethereum
 
-<img src="../images/EtherumStack_MeetupBasel_s.jpg" style="height:320px">
-
-----
-
-## Hands On Session Part 1:Geth Client
+<img src="../images/EtherumStack_MeetupBasel_s.jpg" style="height:520px">
 
 ----
-# Install Geth client & connect to Ethereum Networks
+
+### Hands On Session Part 1:Geth Client
+
+----
+#### Install Geth client & connect to Ethereum Networks
 
 
 Mac:
@@ -16,9 +16,9 @@ https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Mac
 (for Windows instructions under:
 https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windows)
 
-*start terminal
+* start terminal
 
-*Install homebrew
+* Install homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
@@ -30,37 +30,39 @@ brew install ethereum
 ( if already installed execute "brew upgrade ethereum")
 ```
 
-* execute geth on Main net (downlads live chain)
+* execute geth on Main net (downloads live chain)
 ```
 $ geth version
 $ geth
 ```
 
-*Check Nodes of Main Net
+* Check Nodes of Main Net
 https://www.ethernodes.org/network/1
 
 
 * Cancel after 1 or 2 minutes ( Ctrl + C ) and check downloaded ethereum chain data
 /Users/XXXXX/Library/Ethereum/geth/ 
 
-* execute on Test net (downlads test chain)
+* execute on Test net (downlaods test chain)
 $ geth --testnet 
 
 *  Cancel after 1 or 2 minutes ( Ctrl + C ) and check downloaded ethereum test chain data
 /Users/XXXXX/Library/Ethereum/geth/ 
 
 
-*Check Nodes of Test Net
+* Check Nodes of Test Net
 https://www.ethernodes.org/network/2
 
-# build a private blockchain
+#### build a private blockchain
 
 * create a private Blockchain
 
 ```
 cd ~
 mkdir ethereum
+```
 (add Path in ENV variables to reduce typing)
+```
 echo 'export ethereum_home=/Users/myUserName/ethereum' >> ~/.bash_profile
 ```
 Example: echo 'export ethereum_home=/Users/mbenhajla/Documents/Blockchain_Meetup/work/ethereum'>> ~/.bash_profile
@@ -70,7 +72,7 @@ Example: echo 'export ethereum_home=/Users/mbenhajla/Documents/Blockchain_Meetup
 vi $ethereum_home/genesis26.json
 ```
 
--copy following json contents in file "genesis26.json"
+* copy following json contents in file "genesis26.json"
 ```json
 {
   "config": {
@@ -89,134 +91,175 @@ vi $ethereum_home/genesis26.json
   "timestamp"  : "0x00"
 }
 ```
-NOTE:
-coinbase: is the Address that mining rewards are sent; set your new created account there 
-example: "0x1762cf22fde7928d3a84e812e009887e152e4e96"
 
 
--save "genesis26.json" ( with esc !wq)
+* save "genesis26.json" ( with esc !wq)
 
--init the first block in the chain on first node
+* init the first block in the chain on first node
 ``` 
 geth --datadir $ethereum_home/node1 init $ethereum_home/genesis26.json
 ```
 
-- launch with console & interact with the node 1
+* launch with console & interact with the node 1
 ```
 geth --datadir $ethereum_home/node1 --networkid 26 console
 ```
 ( port can be set -port "another Port" example "35555")
 
--Get the list of the available commands
+* Get the list of the available commands
+
+```
 eth
+```
 
-# execute commands to interact with the private Blockchain using Console
+* execute commands to interact with the private Blockchain using Console
 
+```
 net.version
 eth.accounts
 eth.mining
 eth.blockNumber
 eth.getBlock(0)
+```
 
--Create an Account
+* Create an Account
+```
 personal.newAccount()
-
-
 eth.accounts
 eth.getBalance(eth.accounts[0])
+```
 
--start mining
+*start mining
+
 Mining uses eth.coinbase for the mining rewards. eth.coinbase, when not specified it defaults to eth.accounts[0]
+
+```
 eth.coinbase
 personal.unlockAccount(eth.accounts[0])
 miner.start(1)
+```
 ( NOTE: DAG Generation can take some time depending on the difficulty. 
 see https://ethereum.stackexchange.com/questions/1993/what-actually-is-a-dag for more info)
+```
 miner.stop()
 eth.blockNumber ( how many blocks were generated)
+```
+* create a second account and transfer ether from account1 ( after mining)
 
--create a second account and transfer ether from account1 ( after mining)
+```
 eth.sendTransaction({ from:eth.accounts[0], to:eth.accounts[1], value: web3.toWei(2,"ether")})
+```
 
-
-# execute commands on Node1 using JSON over IPC 
+#### execute commands on Node1 using JSON over IPC 
 
 * communicate with the node through IPC (Inter Process Communication) 
+```
 nc -U $ethereum_home/node1/geth.ipc
+```
 (example nc -U /Users/XXXX/Documents/Blockchain_Meetup/work/ethereum/node1/geth.ipc)
 
--send json command 
+* send json command 
+```
 {"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}
+```
 example result:
 {"jsonrpc":"2.0","id":1,"result":["0x90dba0eba8395faf244e0e06b989a4f340541876"]}
 
 
-# execute commands on private Blockchain using JSON over RPC ( for remote access)
+#### execute commands on private Blockchain using JSON over RPC ( for remote access)
 
--Restart node 1 ( 8545 is the default)
+* Restart node 1 ( 8545 is the default)
+```
 geth --datadir $ethereum_home/node1  --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpccorsdomain "*" --rpcapi "eth,net,web3" console
+```
 
-# execute eth.coinbase 
+* execute "eth.coinbase" for example
+```
 $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":
 [],"id":1}' localhost:30304
-# Which returns:
+```
+which do return something like:
 {"jsonrpc":"2.0","id":1,"result":"0x6c503786685f23abae76976fe0aa843f75ea9e71"}
 
 
-# execute commands on private Blockchain using JSON over Web3 library ( Dapps)
+#### execute commands on private Blockchain using JSON over Web3 library ( Dapps)
 
 * get Balance
+```
 web3.eth.getBalance(web3.eth.accounts[0])
+```
 
 * list accounts
+```
 web3.eth.accounts
+```
 
 * Convert from ether to Wei /from Wei to ether
+```
 web3.toWei(1, "ether")
 web3.fromWei( eth.getBalance(eth.accounts[0]))
+```
 
-
-# Test on testRPC 
+#### Tests using testRPC 
 testRPC  is a Virtual Chain ( InMemory Chain) 
 download: https://github.com/ethereumjs/testrpc  (will be used later for development with truffle)
 * execute "exit" command in console
 
 * Install  testrpc
+```
 npm install -g ethereumjs-testrpc
+```
 
 * launch testrpc with 3 accounts ( pre-filled with test Ethers)
+```
 $ testrpc --accounts="3"
+```
 
-*attach geth to testrpc
+* attach geth to testrpc
+```
 geth attach http://localhost:8545
+```
 
-*execute commands as above with private blockchain
+* execute commands as above with private blockchain
 example
+```
 > eth.accounts
 ["0xef737cec8093a4df6442c832cea83501b8442e20", "0x809be9539a58562d3907894dc8101eb60673b5fe", "0x83949fb1fbe8991fe0cb55783ea0d15f9f5dec88"]
+```
 
-*instead of geth , use web3 to communicate with testrpc
--install web3
+* instead of geth , use web3 to communicate with testrpc
+..* install web3
+```
 npm install web3
--install Repl 
+```
+..* install Repl 
+```
 npm install node-repl -g
--start node
+```
+..* start node
+```
 $ node
--execute commands on  http://localhost:8545 from web3
+```
+
+* execute commands on  http://localhost:8545 from web3
 Example:
+```
 const Web3 = require('web3')
 const web3 = new Web3(new Web3.providers.HttpProvider())
 const eth = web3.eth
 > eth.accounts
+```
 
--stop testrpc und geth bei killing the process
-exmaple kill -TERM [PID]
+* stop testrpc und geth bei killing the process
+```
+kill -TERM [PID]
+```
 
-## Hands On Session Part 2: Solidity & SmartContracts
+### Hands On Session Part 2: Solidity & SmartContracts
 
 ----
 
-# Introduction to solidity
+#### Introduction to solidity
 Link Documentation Solidity:
 http://solidity.readthedocs.io/en/develop/solidity-by-example.html
 https://github.com/ConsenSys/smart-contract-best-practices
@@ -232,26 +275,36 @@ https://ethereum.github.io/browser-solidity
 
 * Solidity by example
 
-- Restart node1 from local blockchain 
+* Restart node1 from local blockchain 
+```
 geth --datadir $ethereum_home/node1  --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpccorsdomain "*" --rpcapi "eth,net,web3" console
 
--Unlock Account
+```
+
+* Unlock Account
+```
 personal.unlockAccount(eth.accounts[0])
+```
 
-- start remix
+* start remix
 
--Paste the following example contracts into the remix window
+* Paste the following example contracts into the remix window
 
--select web3.provider and type http://localhost:8545
+* select web3.provider and type http://localhost:8545
 
--Compile (with version 0.4.18 in this tutorial), 
--Fix warnings and errors if you are using another version of remix, and deploy samples on local node1 
+* Compile (with version 0.4.18 in this tutorial) 
+* Fix warnings and errors if you are using another version of remix, and deploy samples on local node1 
 
--start mining
+* start mining
+```
 miner.start(1)
+```
 
-- check Balance 
+* check Balance 
+```
 eth.getBalance(eth.accounts[0])
+```
+
 
 ```solidity
 Example 1 (simple):
@@ -371,9 +424,10 @@ Note: set gaz limit to 3000000 ( in remix)
 
 *************************************
 
-# Create your first smart contract ( for example a simple SHOP) and deploy it on your 
+#### Create your first smart contract ( for example a simple SHOP) and deploy it on your 
 private BlockChain
 
+```
 contract Shop {
 
 	struct Product {
@@ -408,17 +462,20 @@ contract Shop {
      	        
      }	
 }
+```
 
+* deploy SHOP contract 
 
-*deploy SHOP contract 
+* paste SHOP contract into the remix window
 
--paste SHOP contract into the remix window
+* reconnect the browser to web3 
 
--reconnect the browser to web3 
--unlock account ( if not yet done)
+* unlock account ( if not yet done)
+```
 personal.unlockAccount(eth.accounts[0])
--select web3.provider and type http://localhost:8545
+```
+
+* select web3.provider and type http://localhost:8545
 
 
-# (optional) create your own coin for the shop 
  

@@ -1,7 +1,7 @@
 # blockchain-dev-meetup-basel
-### Contents for Basel Blockchain for Developers Meetup
+## Contents for Basel Blockchain for Developers Meetup
 
-here you will find the documentation/resources and links needed for our group Meetups.
+Here you can find the documentation/resources and links needed for our group Meetups.
 Topics are:
 * Blockchain
 * Ethereum
@@ -12,21 +12,21 @@ Topics are:
 * IOTA
 
 ----
-<img src="images/ethereum.png" style="height:320px">
+<img src="images/ethereum.png" style="height:200px">
 
 ----
 
-<img src="images/bitcoin.png" style="height:320px">
+<img src="images/bitcoin.png" style="height:200px">
 
 ----
-<img src="images/hyperledger.png" style="height:320px">
+<img src="images/hyperledger.png" style="height:200px">
 
 ----
-<img src="images/iota.png" style="height:320px">
+<img src="images/iota.png" style="height:200px">
 
 ----
 
-## Links & definitions for Ethereum
+### Links & definitions for Ethereum
 * Ethereum 
 blockchain on which you can build decentralized applications (smart contracts)
 https://ethereum.org
