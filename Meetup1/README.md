@@ -1,7 +1,7 @@
 # Meetup 1 : 26.10.2017
 ## Ethereum
 
-<img src="../images/EtherumStack_MeetupBasel_s.jpg" style="height:520px">
+<img src="../images/EtherumStack_MeetupBasel_b.jpg" style="height:520px">
 
 ----
 
@@ -269,7 +269,9 @@ kill -TERM [PID]
 
 #### Introduction to solidity
 Link Documentation Solidity:
+
 http://solidity.readthedocs.io/en/develop/solidity-by-example.html
+
 https://github.com/ConsenSys/smart-contract-best-practices
 
 * Install Remix Editor locally 
@@ -434,8 +436,7 @@ Note: set gaz limit to 3000000 ( in remix)
 *************************************
 
 
-#### Create your first smart contract ( for example a simple SHOP) and deploy it on your 
-private BlockChain
+#### Create your first smart contract ( for example a simple SHOP) and deploy it on your private BlockChain
 
 ```
 contract Shop {
