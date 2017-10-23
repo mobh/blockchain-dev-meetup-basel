@@ -1,7 +1,7 @@
 # Meetup 1 : 26.10.2017
 ## Ethereum
 
-<img src="../images/EtherumStack_MeetupBasel_b.png" style="height:520px">
+<img src="../images/EtherumStack_MeetupBasel_b.png" style="height:320px">
 
 ----
 
