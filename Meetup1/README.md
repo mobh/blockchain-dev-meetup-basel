@@ -11,10 +11,13 @@
 #### Install Geth client & connect to Ethereum Networks
 
 
-Mac:
+on Mac:
+
 https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Mac
-(for Windows instructions under:
-https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windows)
+
+For Windows instructions under:
+
+https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windows
 
 * start terminal
 
@@ -27,8 +30,9 @@ https://github.com/ethereum/go-ethereum/wiki/Installation-instructions-for-Windo
 ```
 brew tap ethereum/ethereum
 brew install ethereum
-( if already installed execute "brew upgrade ethereum")
 ```
+( if already installed execute "brew upgrade ethereum")
+
 
 * execute geth on Main net (downloads live chain)
 ```
@@ -129,7 +133,7 @@ eth.accounts
 eth.getBalance(eth.accounts[0])
 ```
 
-*start mining
+* start mining
 
 Mining uses eth.coinbase for the mining rewards. eth.coinbase, when not specified it defaults to eth.accounts[0]
 
@@ -150,6 +154,7 @@ eth.blockNumber ( how many blocks were generated)
 eth.sendTransaction({ from:eth.accounts[0], to:eth.accounts[1], value: web3.toWei(2,"ether")})
 ```
 
+
 #### execute commands on Node1 using JSON over IPC 
 
 * communicate with the node through IPC (Inter Process Communication) 
@@ -166,6 +171,7 @@ example result:
 {"jsonrpc":"2.0","id":1,"result":["0x90dba0eba8395faf244e0e06b989a4f340541876"]}
 
 
+
 #### execute commands on private Blockchain using JSON over RPC ( for remote access)
 
 * Restart node 1 ( 8545 is the default)
@@ -180,6 +186,7 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":
 ```
 which do return something like:
 {"jsonrpc":"2.0","id":1,"result":"0x6c503786685f23abae76976fe0aa843f75ea9e71"}
+
 
 
 #### execute commands on private Blockchain using JSON over Web3 library ( Dapps)
@@ -228,15 +235,15 @@ example
 ```
 
 * instead of geth , use web3 to communicate with testrpc
-..* install web3
+- install web3
 ```
 npm install web3
 ```
-..* install Repl 
+- install Repl 
 ```
 npm install node-repl -g
 ```
-..* start node
+- start node
 ```
 $ node
 ```
@@ -254,6 +261,7 @@ const eth = web3.eth
 ```
 kill -TERM [PID]
 ```
+
 
 ### Hands On Session Part 2: Solidity & SmartContracts
 
@@ -273,7 +281,8 @@ or use remote Remix Editor
 https://ethereum.github.io/browser-solidity
 
 
-* Solidity by example
+
+#### Solidity by example
 
 * Restart node1 from local blockchain 
 ```
@@ -423,6 +432,7 @@ contract AnotherBank { // CamelCase
 Note: set gaz limit to 3000000 ( in remix)
 
 *************************************
+
 
 #### Create your first smart contract ( for example a simple SHOP) and deploy it on your 
 private BlockChain
